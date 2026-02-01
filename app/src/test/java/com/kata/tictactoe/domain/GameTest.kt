@@ -28,4 +28,11 @@ class GameTest {
         val updatedGame = game.play(cellIndex = 4)
         assertEquals(Player.X, updatedGame.board.cells[4])
     }
+
+    @Test
+    fun `player switch to O after first move from X`() {
+        val game = Game()
+        val updatedGame = game.play(cellIndex = 0)
+        assertEquals(Player.O, updatedGame.currentPlayer)
+    }
 }

@@ -10,6 +10,7 @@ data class Game(
 
         return copy(
             board = board.copy(cells = updatedCells),
+            currentPlayer = currentPlayer.next()
         )
     }
 }

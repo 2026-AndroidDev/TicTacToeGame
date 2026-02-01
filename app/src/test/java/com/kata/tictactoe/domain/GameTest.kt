@@ -21,4 +21,11 @@ class GameTest {
         val game = Game()
         assertEquals(Player.X, game.currentPlayer)
     }
+
+    @Test
+    fun `player X can play on an empty cell`() {
+        val game = Game()
+        val updatedGame = game.play(cellIndex = 4)
+        assertEquals(Player.X, updatedGame.board.cells[4])
+    }
 }

@@ -35,4 +35,18 @@ class GameTest {
         val updatedGame = game.play(cellIndex = 0)
         assertEquals(Player.O, updatedGame.currentPlayer)
     }
+
+    @Test
+    fun `player cannot play on already played cell`() {
+        val game = Game().play(cellIndex = 0)
+        val updatedGame = game.play(cellIndex = 0)
+        assertEquals(Player.X, updatedGame.board.cells[0])
+    }
+
+    @Test
+    fun `player does not change when move is invalid`() {
+        val game = Game().play(cellIndex = 0)
+        val updatedGame = game.play(cellIndex = 0)
+        assertEquals(Player.O, updatedGame.currentPlayer)
+    }
 }

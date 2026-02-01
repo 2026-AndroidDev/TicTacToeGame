@@ -5,6 +5,9 @@ data class Game(
     val currentPlayer: Player = Player.X
 ) {
     fun play(cellIndex: Int): Game {
+
+        if (board.cells[cellIndex] != null) return this
+
         val updatedCells = board.cells.toMutableList()
         updatedCells[cellIndex] = currentPlayer
 

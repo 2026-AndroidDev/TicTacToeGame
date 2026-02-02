@@ -87,4 +87,42 @@ class GameTest {
 
         assertEquals(GameState.Won(Player.X), game.state)
     }
+
+    @Test
+    fun `player O wins with first column`() {
+        val game = Game()
+            .play(1) // X
+            .play(0) // O
+            .play(2) // X
+            .play(3) // O
+            .play(4) // X
+            .play(6) // O
+
+        assertEquals(GameState.Won(Player.O), game.state)
+    }
+
+    @Test
+    fun `player X wins with second column`() {
+        val game = Game()
+            .play(1) // X
+            .play(0) // O
+            .play(4) // X
+            .play(2) // O
+            .play(7) // X
+
+        assertEquals(GameState.Won(Player.X), game.state)
+    }
+
+    @Test
+    fun `player O wins with third column`() {
+        val game = Game()
+            .play(0) // X
+            .play(2) // O
+            .play(1) // X
+            .play(5) // O
+            .play(3) // X
+            .play(8) // O
+
+        assertEquals(GameState.Won(Player.O), game.state)
+    }
 }

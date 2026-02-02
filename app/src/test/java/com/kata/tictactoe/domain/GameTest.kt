@@ -125,4 +125,29 @@ class GameTest {
 
         assertEquals(GameState.Won(Player.O), game.state)
     }
+
+    @Test
+    fun `player X wins with left-to-right diagonal`() {
+        val game = Game()
+            .play(0) // X
+            .play(1) // O
+            .play(4) // X
+            .play(2) // O
+            .play(8) // X
+
+        assertEquals(GameState.Won(Player.X), game.state)
+    }
+
+    @Test
+    fun `player O wins with right-to-left diagonal`() {
+        val game = Game()
+            .play(0) // X
+            .play(2) // O
+            .play(1) // X
+            .play(4) // O
+            .play(8) // X
+            .play(6) // O
+
+        assertEquals(GameState.Won(Player.O), game.state)
+    }
 }

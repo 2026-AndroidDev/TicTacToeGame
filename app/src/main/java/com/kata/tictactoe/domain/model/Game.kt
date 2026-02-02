@@ -16,7 +16,10 @@ data class Game(
 
         val updatedBoard = board.copy(cells = updatedCells)
 
-        val winner = findRowWinner(updatedBoard) ?: findColumnWinner(updatedBoard)
+        val winner =
+            findRowWinner(updatedBoard) ?: findColumnWinner(updatedBoard) ?: findDiagonalWinner(
+                updatedBoard
+            )
         val updatedStatus = if (winner != null) GameState.Won(winner) else GameState.InProgress
 
         return copy(
@@ -59,5 +62,20 @@ data class Game(
         }
 
         return null
+    }
+
+    private fun findDiagonalWinner(board: Board): Player? {
+        val size = board.size
+
+        val leftDiagonal = List(size) { index -> index * (size + 1) }
+        val rightDiagonal = List(size) { index -> (index + 1) * (size - 1) }
+
+        return winnerFromLine(board, leftDiagonal)
+            ?: winnerFromLine(board, rightDiagonal)
+    }
+
+    private fun winnerFromLine(board: Board, indexes: List<Int>): Player? {
+        val first = board.cells[indexes.first()] ?: return null
+        return if (indexes.all { board.cells[it] == first }) first else null
     }
 }

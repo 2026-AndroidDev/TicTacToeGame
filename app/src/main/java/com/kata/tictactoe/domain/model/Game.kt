@@ -20,7 +20,12 @@ data class Game(
             findRowWinner(updatedBoard) ?: findColumnWinner(updatedBoard) ?: findDiagonalWinner(
                 updatedBoard
             )
-        val updatedStatus = if (winner != null) GameState.Won(winner) else GameState.InProgress
+        val updatedStatus = when {
+            winner != null -> GameState.Won(winner)
+            updatedBoard.cells.none { it == null } -> GameState.Draw
+            else -> GameState.InProgress
+        }
+
 
         return copy(
             board = board.copy(cells = updatedCells),

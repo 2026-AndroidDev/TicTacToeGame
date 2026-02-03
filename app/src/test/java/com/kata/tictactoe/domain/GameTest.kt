@@ -150,4 +150,20 @@ class GameTest {
 
         assertEquals(GameState.Won(Player.O), game.state)
     }
+
+    @Test
+    fun `game is draw when all cells are filled and there is no winner`() {
+        val game = Game()
+            .play(0) // X
+            .play(1) // O
+            .play(2) // X
+            .play(4) // O
+            .play(3) // X
+            .play(5) // O
+            .play(7) // X
+            .play(6) // O
+            .play(8) // X
+
+        assertEquals(GameState.Draw, game.state)
+    }
 }

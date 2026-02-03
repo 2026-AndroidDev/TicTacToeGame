@@ -10,9 +10,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.kata.tictactoe.R
 import com.kata.tictactoe.domain.model.GameState
 import com.kata.tictactoe.presentation.GameViewModel
 import com.kata.tictactoe.presentation.UiEvent
@@ -30,12 +32,21 @@ fun BoardScreen(
         modifier = modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        val text = when (val gameState = uiState.game.state) {
+            is GameState.InProgress -> stringResource(
+                id = R.string.board_turn, uiState.game.currentPlayer.name
+            )
+
+            is GameState.Won -> stringResource(
+                id = R.string.board_winner, gameState.player.name
+            )
+
+            is GameState.Draw -> stringResource(id = R.string.board_draw)
+        }
+
         Text(
-            text = when (val gameState = uiState.game.state) {
-                is GameState.InProgress -> "Turn: ${uiState.game.currentPlayer.name}"
-                is GameState.Won -> "Winner: ${gameState.player.name}"
-                is GameState.Draw -> "It's a draw"
-            },
+            text = text,
             style = MaterialTheme.typography.headlineSmall
         )
 
@@ -49,7 +60,7 @@ fun BoardScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = { viewModel.onEvent(UiEvent.Restart) }) {
-            Text(text = "Restart")
+            Text(text = stringResource(id = R.string.board_restart))
         }
     }
 }

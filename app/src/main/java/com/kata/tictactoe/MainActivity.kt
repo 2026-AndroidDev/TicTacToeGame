@@ -7,10 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.kata.tictactoe.presentation.screen.BoardScreen
 import com.kata.tictactoe.ui.theme.MyTicTacToeTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,28 +20,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyTicTacToeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "TicTacToe Kata",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    BoardScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "$name!",
-        modifier = modifier
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun BoardScreenPreview() {
     MyTicTacToeTheme {
-        Greeting("TicTacToe Kata")
+        BoardScreen()
     }
 }

@@ -166,4 +166,36 @@ class GameTest {
 
         assertEquals(GameState.Draw, game.state)
     }
+
+    @Test
+    fun `no moves allowed after game is won`() {
+        val game = Game()
+            .play(0) // X
+            .play(3) // O
+            .play(1) // X
+            .play(4) // O
+            .play(2) // X
+
+        val afterWin = game.play(5) // should be ignored
+
+        assertEquals(game, afterWin)
+    }
+
+    @Test
+    fun `no moves allowed after game is draw`() {
+        val game = Game()
+            .play(0) // X
+            .play(1) // O
+            .play(2) // X
+            .play(4) // O
+            .play(3) // X
+            .play(5) // O
+            .play(7) // X
+            .play(6) // O
+            .play(8) // X
+
+        val afterDraw = game.play(0) // should be ignored
+
+        assertEquals(game, afterDraw)
+    }
 }

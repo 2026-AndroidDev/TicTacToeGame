@@ -27,4 +27,17 @@ class GameViewModelTest {
         val game = viewModel.state.value.game
         assertEquals(Game(), game)
     }
+
+    @Test
+    fun `when user clicks already played cell state does not change`() = runTest {
+        val viewModel = GameViewModel()
+
+        viewModel.onEvent(UiEvent.OnCellClicked(cellIndex = 4))
+        val stateAfterFirstMove = viewModel.state.value
+
+        viewModel.onEvent(UiEvent.OnCellClicked(cellIndex = 4))
+        val stateAfterInvalidMove = viewModel.state.value
+
+        assertEquals(stateAfterFirstMove, stateAfterInvalidMove)
+    }
 }

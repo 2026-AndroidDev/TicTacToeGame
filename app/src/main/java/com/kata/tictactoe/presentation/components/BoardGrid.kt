@@ -13,7 +13,7 @@ import com.kata.tictactoe.domain.model.Board
 @Composable
 fun BoardGrid(
     board: Board,
-    onCellClicked: (Int) -> Unit,
+    onCellClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val boardSize = board.size
@@ -24,10 +24,9 @@ fun BoardGrid(
                 for (columnIndex in 0 until boardSize) {
                     val cellIndex = rowIndex * boardSize + columnIndex
                     val player = board.cells[cellIndex]
-
                     BoardCell(
                         player = player,
-                        onClick = { onCellClicked(cellIndex) },
+                        onClick = { onCellClick(cellIndex) },
                         modifier = Modifier
                             .weight(1f)
                             .aspectRatio(1f)

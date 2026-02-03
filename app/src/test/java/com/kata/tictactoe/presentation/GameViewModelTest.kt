@@ -16,4 +16,15 @@ class GameViewModelTest {
         val game = viewModel.state.value.game
         assertEquals(Game().play(4), game)
     }
+
+    @Test
+    fun `when user clicks restart game resets to initial state`() = runTest {
+        val viewModel = GameViewModel()
+
+        viewModel.onEvent(UiEvent.OnCellClicked(cellIndex = 4))
+        viewModel.onEvent(UiEvent.Restart)
+
+        val game = viewModel.state.value.game
+        assertEquals(Game(), game)
+    }
 }

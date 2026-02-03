@@ -17,6 +17,10 @@ class GameViewModel : ViewModel() {
                 val updatedGame = currentGame.play(event.cellIndex)
                 _state.value = _state.value.copy(game = updatedGame)
             }
+
+            UiEvent.Restart -> {
+                _state.value = GameUiState(game = Game())
+            }
         }
     }
 }
